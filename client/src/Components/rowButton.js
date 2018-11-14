@@ -30,6 +30,7 @@ class RowButton extends Component {
         console.log("Error happened, printed below");
         return console.log("err", err);
       });
+    this.props.getFromDatabase();
   };
 
   render() {

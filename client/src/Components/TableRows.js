@@ -6,7 +6,12 @@ import RowButton from "./rowButton";
 
 class TableRows extends Component {
   state = {
-    results: []
+    results: [],
+    show: true
+  };
+
+  baseState = () => {
+    this.setState({ results: [] });
   };
 
   componentDidMount() {
@@ -14,8 +19,9 @@ class TableRows extends Component {
   }
 
   getFromDatabase = () => {
+    this.baseState();
     return axios
-      .get("/api/getFromDatabase")
+      .post("/api/getFromDatabase")
       .then(res => {
         this.setState({ results: this.state.results.concat(res.data) });
         console.log(this.state.results);
@@ -40,7 +46,7 @@ class TableRows extends Component {
           <TableCell>{item.DeviceName}</TableCell>
           <TableCell>{item.Issue}</TableCell>
           <TableCell>{item.RepairStatus}</TableCell>
-          <RowButton id={item.id} />
+          <RowButton id={item.id} getFromDatabase={this.getFromDatabase} />
         </TableRow>
       );
     });

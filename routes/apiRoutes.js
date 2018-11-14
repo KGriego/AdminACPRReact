@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require("../db/dbConnection");
 
 //Routes to the database go here.
-router.get("/getFromDatabase", (req, res) => {
+router.post("/getFromDatabase", (req, res) => {
   db.query("SELECT * FROM `backlog`", (err, results) => {
     //if err, stop query to database
     if (err) {
@@ -17,20 +17,22 @@ router.get("/getFromDatabase", (req, res) => {
 });
 
 router.post("/addToDatabase", (req, res) => {
-  // db.query("SELECT * FROM `myTablebacklogme` = ?");
-  // console.log(req.body);
-  console.log("testtinggg addong to database");
-  // db.query("INSERT INTO ");
+  console.log(req.body);
+  const { name, phoneNumber, device, issue, repairStatus } = req.body;
+  db.query(
+    "INSERT INTO `backlog` (OwnerName, OwnerNumber, DeviceName, Issue, RepairStatus) VALUES (?, ?, ?, ?, ?)",
+    [name, phoneNumber, device, issue, repairStatus],
+    (err, results) => {
+      if (err) {
+        res.statusCode = 500;
+        return res.json({
+          errors: ["Failed to add to database"]
+        });
+      }
+      return res.json(results);
+    }
+  );
 });
-
-// con.query(
-//   'UPDATE employees SET location = ? Where ID = ?',
-//   ['South Africa', 5],
-//   (err, result) => {
-//     if (err) throw err;
-// console.log(`Changed ${result.changedRows} row(s)`);
-// }
-// );
 
 router.post("/updateDatabase", (req, res) => {
   const id = req.body.rowId;

@@ -4,8 +4,6 @@ const path = require("path");
 
 const bodyParser = require("body-parser");
 const apiRoutes = require("./routes/apiRoutes");
-// loads our connection to the mongo database
-// const dbConnection = require("./db");
 
 const PORT = process.env.PORT || 3010;
 

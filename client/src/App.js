@@ -4,6 +4,7 @@ import "./App.css";
 
 import NavBar from "./Components/NavBar";
 import ListOfTables from "./Pages/ListOfTables/";
+import AddNew from "./Pages/AddNew";
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
           <NavBar />
           <Switch>
             <Route exact path="/" component={ListOfTables} />
+            <Route exact path="/addNew" component={AddNew} />
           </Switch>
           {/* <Footer /> */}
         </div>

@@ -37,6 +37,7 @@ class ListOfTables extends Component {
         spacing={0}
         direction="column"
         justify="center"
+        style={{ minHeight: "40em" }}
       >
         <Grid item xs={8}>
           <Paper className={root}>

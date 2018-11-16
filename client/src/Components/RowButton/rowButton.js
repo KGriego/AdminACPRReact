@@ -56,7 +56,7 @@ class RowButton extends Component {
             onClose={this.handleClose}
             value={id}
           >
-            Recieved
+            Dropped Off
           </MenuItem>
           <MenuItem
             onClick={this.updateDatabase}
@@ -71,6 +71,13 @@ class RowButton extends Component {
             value={id}
           >
             Repaired
+          </MenuItem>
+          <MenuItem
+            onClick={this.updateDatabase}
+            onClose={this.handleClose}
+            value={id}
+          >
+            Picked Up
           </MenuItem>
         </Menu>
       </TableCell>

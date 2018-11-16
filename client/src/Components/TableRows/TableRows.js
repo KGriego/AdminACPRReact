@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import RowButton from "./rowButton";
+import RowButton from "../RowButton";
 
 class TableRows extends Component {
   state = {
@@ -21,10 +21,11 @@ class TableRows extends Component {
   getFromDatabase = () => {
     this.baseState();
     return axios
-      .post("/api/getFromDatabase")
+      .get("/api/getFromDatabase")
       .then(res => {
         this.setState({ results: this.state.results.concat(res.data) });
         console.log(this.state.results);
+        console.log(res);
       })
       .catch(err => {
         console.log("error happened, printed below");
@@ -39,7 +40,7 @@ class TableRows extends Component {
       return (
         <TableRow key={item.id}>
           <TableCell numeric component="th" scope="row">
-            {item.DataAdded}
+            {item.DateAdded}
           </TableCell>
           <TableCell>{item.OwnerName}</TableCell>
           <TableCell>{item.OwnerNumber}</TableCell>

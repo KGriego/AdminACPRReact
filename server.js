@@ -11,13 +11,6 @@ const PORT = process.env.PORT || 3010;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, "client/build")));
-// Anything that doesn't match the above, send back index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
-});
-
 app.use("/api", apiRoutes);
 
 app.listen(PORT, function() {

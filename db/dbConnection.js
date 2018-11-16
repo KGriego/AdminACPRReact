@@ -1,39 +1,29 @@
 const mysql = require("mysql2");
+const env = process.env.NODE_ENV || "production";
+const config = require("../config/config")[env];
+//console.log(config)
 
-const dbInfo = {
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "",
-  database: "phones"
-};
 //creating conenction to mysql database
+function definingConnection() {
+  if (env === "development") {
+    return mysql.createConnection({
+      host: config.host,
+      user: config.username,
+      database: config.database,
+      port: config.port
+    });
+  } else {
+    return mysql.createConnection(config.url);
+  }
+}
 
-handleDisconnect = () => {
-  connection = mysql.createConnection(dbInfo); // Recreate the connection, since
-  // the old one cannot be reused.
-
-  connection.connect(err => {
-    // The server is either down
-    if (err) {
-      // or restarting (takes a while sometimes).
-      console.log("error when connecting to db:", err);
-      setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
-    } // to avoid a hot loop, and to allow our node script to
-  }); // process asynchronous requests in the meantime.
-  // If you're also serving http, display a 503 error.
-  connection.on("error", err => {
-    console.log("db error", err);
-    if (err.code === "PROTOCOL_CONNECTION_LOST") {
-      // Connection to the MySQL server is usually
-      handleDisconnect(); // lost due to either server restart, or a
-    } else {
-      // connnection idle timeout (the wait_timeout
-      throw err; // server variable configures this)
-    }
-  });
-};
-
-handleDisconnect();
+const connection = definingConnection();
+connection.on("error", err => {
+  if (err) {
+    console.log("Connection to database was lost");
+  } else {
+    console.log("Connection created");
+  }
+});
 
 module.exports = connection;

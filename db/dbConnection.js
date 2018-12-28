@@ -1,5 +1,5 @@
 const mysql = require("mysql2");
-const env = process.env.NODE_ENV || "production";
+const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
 //console.log(config)
 

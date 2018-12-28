@@ -10,9 +10,9 @@ const PORT = process.env.PORT || 3010;
 // ===== Middleware ====
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors);
+app.use(cors());
 app.use("/api", apiRoutes);
 
 app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  console.log(`🌎  => API Server now listening on PORT ${PORT}!`);
 });

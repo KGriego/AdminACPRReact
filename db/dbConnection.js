@@ -12,8 +12,10 @@ function definingConnection() {
       database: config.database,
       port: config.port
     });
-  } else {
+  } else if (env === "production") {
     return mysql.createConnection(config.url);
+  } else {
+    console.log("error happened");
   }
 }
 

@@ -13,7 +13,7 @@ function definingConnection() {
       port: config.port
     });
   } else if (env === "production") {
-    return mysql.createConnection(config.url);
+    return mysql.createConnection(config.URL);
   } else {
     console.log("error happened");
   }

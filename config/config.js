@@ -17,7 +17,7 @@ const config = {
     dialect: "mysql"
   },
   production: {
-    url: process.env.url
+    URL: process.env.JAWSDB_URL
   }
 };
 
